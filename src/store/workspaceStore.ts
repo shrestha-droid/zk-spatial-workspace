@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 import {
-  Node,
-  Edge,
   applyNodeChanges,
   applyEdgeChanges,
-  NodeChange,
-  EdgeChange,
+  type Node,
+  type Edge,
+  type NodeChange,
+  type EdgeChange,
 } from 'reactflow';
 import { generateKey, encryptPayload, decryptPayload } from '../lib/crypto';
 
@@ -50,15 +50,15 @@ export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
     set({ sessionKey: key });
   },
 
-  onNodesChange: (changes) => {
+  onNodesChange: (changes: NodeChange[]) => {
     set({ nodes: applyNodeChanges(changes, get().nodes) });
   },
 
-  onEdgesChange: (changes) => {
+  onEdgesChange: (changes: EdgeChange[]) => {
     set({ edges: applyEdgeChanges(changes, get().edges) });
   },
 
-  addNode: (node) => {
+  addNode: (node: Node) => {
     set({ nodes: [...get().nodes, node] });
   },
 
